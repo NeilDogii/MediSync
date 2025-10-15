@@ -37,7 +37,7 @@ export default function Hero() {
           {/* BUTTONS */}
           <div className="flex flex-col sm:flex-row items-center md:items-start space-y-4 sm:space-y-0 sm:space-x-8 mb-12 justify-center md:justify-start">
             <Link
-              href="/appointment"
+              href="/book"
               className="bg-[#0074cc] hover:bg-[#005fa3] text-white 
                          px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold 
                          text-sm md:text-lg text-center w-full sm:w-auto"

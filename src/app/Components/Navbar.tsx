@@ -3,13 +3,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Function to generate link classes dynamically
+  const getLinkClass = (href: string) =>
+    pathname === href
+      ? "text-[#0074cc] font-bold"
+      : "text-black hover:text-[#0074cc]";
+
   return (
     <nav className="fixed top-7 left-8 right-8 z-50 bg-white shadow-md rounded-2xl mx-auto my-4 px-4 md:px-8 py-3 max-w-[95%] lg:max-w-[90%]">
       <div className="flex justify-between items-center">
-        {/* Logo  */}
+        {/* Logo */}
         <div className="flex items-center space-x-2">
           <Image
             src="/assets/logo.jpg"
@@ -19,24 +28,26 @@ export default function Navbar() {
             className="object-contain"
           />
         </div>
-        {/* Desktop  */}
+
+        {/* Desktop Links */}
         <div className="hidden md:flex space-x-8 text-lg font-medium">
-          <Link href="/" className="text-[#0074cc] hover:text-[#005fa3]">
+          <Link href="/" className={getLinkClass("/")}>
             Home
           </Link>
-          <Link href="/service" className="text-black hover:text-[#0074cc]">
-            Service
+          <Link href="/book" className={getLinkClass("/book")}>
+            Book Now
           </Link>
-          <Link href="/help" className="text-black hover:text-[#0074cc]">
+          <Link href="/help" className={getLinkClass("/help")}>
             Help
           </Link>
-          <Link href="/blogs" className="text-black hover:text-[#0074cc]">
+          <Link href="/blogs" className={getLinkClass("/blogs")}>
             Blogs
           </Link>
-          <Link href="/contact" className="text-black hover:text-[#0074cc]">
+          <Link href="/contact" className={getLinkClass("/contact")}>
             Contact Us
           </Link>
         </div>
+
         {/* Desktop Buttons */}
         <div className="hidden md:flex items-center space-x-4">
           <Link
@@ -52,6 +63,7 @@ export default function Navbar() {
             Log In
           </Link>
         </div>
+
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -60,7 +72,8 @@ export default function Navbar() {
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
-      {/* Mobile  Menu */}
+
+      {/* Mobile Menu */}
       <div
         className={`fixed top-0 right-0 h-full w-64 bg-white shadow-2xl transform transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
@@ -75,43 +88,45 @@ export default function Navbar() {
             <X size={26} />
           </button>
         </div>
+
         {/* Links */}
         <div className="flex flex-col px-6 py-6 space-y-6 text-lg font-medium">
           <Link
             href="/"
             onClick={() => setIsOpen(false)}
-            className="hover:text-[#0074cc]"
+            className={getLinkClass("/")}
           >
             Home
           </Link>
           <Link
-            href="/service"
+            href="/book"
             onClick={() => setIsOpen(false)}
-            className="hover:text-[#0074cc]"
+            className={getLinkClass("/book")}
           >
-            Service
+            Book Now
           </Link>
           <Link
             href="/help"
             onClick={() => setIsOpen(false)}
-            className="hover:text-[#0074cc]"
+            className={getLinkClass("/help")}
           >
             Help
           </Link>
           <Link
             href="/blogs"
             onClick={() => setIsOpen(false)}
-            className="hover:text-[#0074cc]"
+            className={getLinkClass("/blogs")}
           >
             Blogs
           </Link>
           <Link
             href="/contact"
             onClick={() => setIsOpen(false)}
-            className="hover:text-[#0074cc]"
+            className={getLinkClass("/contact")}
           >
             Contact Us
           </Link>
+
           {/* Mobile Buttons */}
           <div className="border-t pt-5 flex flex-col space-y-3">
             <Link
