@@ -23,3 +23,68 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Main calendar container */
+.react-calendar {
+  width: 100%;
+  max-width: 350px;   /* Adjust to your card width */
+  background-color: #ffffff;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Gilroy', sans-serif; /* match your dashboard font */
+}
+
+/* Individual day tiles */
+.react-calendar__tile {
+  background-color: #f0f9ff;
+  color: #0076B6;
+  border-radius: 0.5rem;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+/* Hover effect on tiles */
+.react-calendar__tile:hover {
+  background-color: #00B4D8;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Active selected day */
+.react-calendar__tile--active {
+  background-color: #0076B6;
+  color: white;
+  border-radius: 0.5rem;
+}
+
+/* Highlight current day */
+.react-calendar__tile--now {
+  border: 2px solid #00B4D8;
+  border-radius: 0.5rem;
+}
+
+/* Month/Year label */
+.react-calendar__navigation {
+  background: #ffffff;
+  border: none;
+  margin-bottom: 0.5rem;
+}
+
+.react-calendar__navigation button {
+  color: #0076B6;
+  font-weight: bold;
+}
+
+/* Weekdays row */
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #0076B6;
+}
+
+/* Optional: Disable default focus outline */
+.react-calendar__tile:focus {
+  outline: none;
+}
