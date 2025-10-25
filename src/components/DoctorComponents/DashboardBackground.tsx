@@ -1,10 +1,10 @@
-// ...existing code...
+
 'use client'
 import React from 'react'
-import Calendar from 'react-calendar'
 import { MessageCircle } from 'lucide-react'
 import PatientCard, { samplePatients, getTotalVisits } from './patient'
 import PatientList, { samplePatientList } from './patientList'
+import Calender from './calender'
 
 export default function DashboardBackground({
   children,
@@ -114,11 +114,11 @@ export default function DashboardBackground({
 
               {/* Calendar */}
               <div
-                className="mt-24 bg-white rounded-3xl shadow-md p-6 w-[350px] h-[312.7px] flex flex-col items-center justify-center
-                           max-[950px]:mt-16 max-[950px]:w-[320px] max-[950px]:h-[300px]
-                           max-[750px]:mt-6 max-[750px]:w-full max-[750px]:h-auto"
+                className="mt-24  flex flex-col items-center justify-center
+                            max-[950px]:mt-16 max-[950px]:w-[320px] max-[950px]:h-[300px]
+                            max-[750px]:mt-6 max-[750px]:w-full max-[750px]:h-auto"
               >
-                <Calendar />
+                <Calender />
               </div>
             </div>
           </div>
@@ -127,4 +127,3 @@ export default function DashboardBackground({
     </>
   )
 }
-// ...existing code...

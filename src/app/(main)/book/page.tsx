@@ -1,7 +1,7 @@
-import BookPageBG from '@/app/Components/bookPageBG'
-import Faq from '@/app/Components/Faq'
-import Footer from '@/app/Components/Footer'
-import Navbar from '@/app/Components/Navbar'
+import BookPageBG from '@/components/UserComponents/bookPageBG'
+import Faq from '@/components/UserComponents/Faq'
+import Footer from '@/components/UserComponents/Footer'
+import Navbar from '@/components/UserComponents/Navbar'
 import React from 'react'
 
 export default function Page() {
