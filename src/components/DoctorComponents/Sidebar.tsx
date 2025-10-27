@@ -7,9 +7,9 @@ export default function Sidebar() {
   return (
     <aside className="h-screen w-28 bg-[#0077B6] flex flex-col items-center py-6 space-y-8">
       {/* Logo */}
-      <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-white/20 text-white font-bold text-xl">
-        D
-      </div>
+      <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-white/20">
+          <img src="favicon.ico" alt="Logo" className="w-full h-full object-cover" />
+        </div>
 
       {/* Navigation Icons */}
       <nav className="flex flex-col items-center space-y-10 mt-10">

@@ -143,7 +143,7 @@ export default function Hero() {
           <div className="flex-1 w-full min-w-[200px]">
             <input
               type="text"
-              placeholder="Speciality"
+              placeholder="State Your Issue"
               value={speciality}
               onChange={(e) => setSpeciality(e.target.value)}
               className="w-full px-4 py-3 border-2 border-[#90E0EF] rounded-lg focus:outline-none focus:border-[#00B4D8] text-gray-700 placeholder-gray-400"
