@@ -18,8 +18,7 @@ export default function Sidebar() {
           <LayoutGrid size={24} />
         </button>
 
-        {/* Calendar */}
-        <Link href="/doctor/calender" className="w-12 h-12 flex items-center justify-center rounded-xl text-white/70 hover:text-white hover:bg-[#00B4D8]/20 transition-all">
+        {/* Calendar */}        <Link href="/doctor/calender" className="w-12 h-12 flex items-center justify-center rounded-xl text-white/70 hover:text-white hover:bg-[#00B4D8]/20 transition-all">
           <button className="w-12 h-12 flex items-center justify-center rounded-xl text-white/70 hover:text-white hover:bg-[#00B4D8]/20 transition-all">
             <Calendar size={24} />
           </button>
