@@ -18,6 +18,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Trash2 } from "lucide-react";
+import Sidebar from "@/components/DoctorComponents/Sidebar";
 
 const Calendar: React.FC = () => {
   const [currentEvents, setCurrentEvents] = useState<EventApi[]>([]);
@@ -83,75 +84,79 @@ const Calendar: React.FC = () => {
 
   return (
     <div>
-      <div className="flex w-full px-10 justify-start items-start gap-8 font-sans">
-        <div className="w-3/12">
-          <div className="py-10 text-2xl font-extrabold px-7 text-[#005FA3] border-b-2 border-[#0093D6]">
-            Calendar Events
-          </div>
-          <ul className="space-y-4 mt-4">
-            {currentEvents.length <= 0 && (
-              <div className="italic text-center text-gray-400">
-                No Events Present
-              </div>
-            )}
 
-            {currentEvents.length > 0 &&
-              currentEvents.map((event: EventApi) => (
-                <li
-                  key={event.id}
-                  className="flex justify-between items-center border border-[#0093D6] shadow px-4 py-3 rounded-md text-[#005FA3] font-semibold hover:bg-[#0093D6]/10 transition"
-                >
-                  <div>
-                    {event.title}
-                    <br />
-                    <label className="text-[#005FA3]/80 font-medium text-sm">
-                      {formatDate(event.start!, {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </label>
-                  </div>
+      <div className="min-h-screen bg-gray-50 flex flex-col md:flex-row">
+        <Sidebar />
 
-                  {/* Delete Icon */}
-                  <button
-                    onClick={() => handleDeleteEvent(event.id)}
-                    className="text-[#0093D6] hover:text-red-500 transition"
-                    title="Delete Event"
+        <div className="flex flex-col md:flex-row w-full px-4 md:px-10 gap-6 md:gap-8 py-6">
+          {/* Left Section */}
+          <div className="w-full md:w-1/3 lg:w-1/4 bg-white rounded-2xl shadow-md border border-[#0093D6]/30">
+            <div className="py-6 text-xl md:text-2xl font-extrabold px-5 text-[#005FA3] border-b-2 border-[#0093D6]">
+              Calendar Events
+            </div>
+            <ul className="space-y-3 p-4 overflow-y-auto max-h-[70vh]">
+              {currentEvents.length <= 0 && (
+                <div className="italic text-center text-gray-400">
+                  No Events Present
+                </div>
+              )}
+
+              {currentEvents.length > 0 &&
+                currentEvents.map((event: EventApi) => (
+                  <li
+                    key={event.id}
+                    className="flex justify-between items-center border border-[#0093D6]/50 shadow-sm px-3 py-2 rounded-md text-[#005FA3] font-semibold hover:bg-[#0093D6]/10 transition"
                   >
-                    <Trash2 size={18} />
-                  </button>
-                </li>
-              ))}
+                    <div className="text-sm md:text-base">
+                      {event.title}
+                      <br />
+                      <label className="text-[#005FA3]/80 font-medium text-xs md:text-sm">
+                        {formatDate(event.start!, {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </label>
+                    </div>
 
-          </ul>
-        </div>
+                    <button
+                      onClick={() => handleDeleteEvent(event.id)}
+                      className="text-[#0093D6] hover:text-red-500 transition"
+                      title="Delete Event"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </li>
+                ))}
+            </ul>
+          </div>
 
-        <div className="w-9/12 mt-8 border-2  rounded-xl shadow-lg p-4">
-          <FullCalendar
-            height={"85vh"}
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            headerToolbar={{
-              left: "prev,next today",
-              center: "title",
-              right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
-            }}
-            initialView="dayGridMonth"
-            editable={true}
-            selectable={true}
-            selectMirror={true}
-            dayMaxEvents={true}
-            select={handleDateClick}
-            // eventClick={handleEventClick}
-            eventsSet={(events) => setCurrentEvents(events)}
-            initialEvents={
-              typeof window !== "undefined"
-                ? JSON.parse(localStorage.getItem("events") || "[]")
-                : []
-            }
-            eventColor="#005FA3"
-            eventTextColor="#ffffff"
-          />
+          {/* Right Section */}
+          <div className="w-full md:w-2/3 lg:w-3/4 border-2 rounded-2xl shadow-lg bg-white p-3 md:p-5">
+            <FullCalendar
+              height={"80vh"}
+              plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+              headerToolbar={{
+                left: "prev,next today",
+                center: "title",
+                right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+              }}
+              initialView="dayGridMonth"
+              editable={true}
+              selectable={true}
+              selectMirror={true}
+              dayMaxEvents={true}
+              select={handleDateClick}
+              eventsSet={(events) => setCurrentEvents(events)}
+              initialEvents={
+                typeof window !== "undefined"
+                  ? JSON.parse(localStorage.getItem("events") || "[]")
+                  : []
+              }
+              eventColor="#005FA3"
+              eventTextColor="#ffffff"
+            />
+          </div>
         </div>
       </div>
 
