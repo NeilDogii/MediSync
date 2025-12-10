@@ -5,11 +5,11 @@ import Link from 'next/link'
 
 export default function Sidebar() {
   return (
-    <aside className="h-screen w-28 bg-[#0077B6] flex flex-col items-center py-6 space-y-8">
+    <aside className="h-screen w-28 bg-[#005FA3] flex flex-col items-center py-6 space-y-8">
       {/* Logo */}
-      <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-white/20">
-          <img src="favicon.ico" alt="Logo" className="w-full h-full object-cover" />
-        </div>
+      <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-shadow-md">
+        <img src="./assets/logoimglogo.png" alt="logo" />
+      </div>
 
       {/* Navigation Icons */}
       <nav className="flex flex-col items-center space-y-10 mt-10">
@@ -18,11 +18,10 @@ export default function Sidebar() {
           <LayoutGrid size={24} />
         </button>
 
-        {/* Calendar */}
-        <Link href="/doctor/calender" className="w-12 h-12 flex items-center justify-center rounded-xl text-white/70 hover:text-white hover:bg-[#00B4D8]/20 transition-all">
-        <button className="w-12 h-12 flex items-center justify-center rounded-xl text-white/70 hover:text-white hover:bg-[#00B4D8]/20 transition-all">
-          <Calendar size={24} />
-        </button>
+        {/* Calendar */}        <Link href="/doctor/calender" className="w-12 h-12 flex items-center justify-center rounded-xl text-white/70 hover:text-white hover:bg-[#00B4D8]/20 transition-all">
+          <button className="w-12 h-12 flex items-center justify-center rounded-xl text-white/70 hover:text-white hover:bg-[#00B4D8]/20 transition-all">
+            <Calendar size={24} />
+          </button>
         </Link>
 
         {/* Timer/Stats */}
