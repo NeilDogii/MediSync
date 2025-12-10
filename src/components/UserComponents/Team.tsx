@@ -18,7 +18,7 @@ interface TeamMember {
 const teamMembers: TeamMember[] = [
   {
     id: 1,
-    name: 'Trish Carter',
+    name: 'Dr. Sandip Sen',
     role: 'GYNECOLOGIST',
     description: 'Lorem ipsum dolor sit amet consecte adipiscing elit amet hendrerit pretium nulla sed enim iaculis mi.',
     imagePath: '/assets/doctor1.jpeg',
@@ -31,7 +31,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     id: 2,
-    name: 'Sophie Moore',
+    name: 'Dr. Mohit Jha',
     role: 'DENTAL SPECIALIST',
     description: 'Lorem ipsum dolor sit amet consecte adipiscing elit amet hendrerit pretium nulla sed enim iaculis mi.',
     imagePath: '/assets/doctor2.jpg',
@@ -44,7 +44,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     id: 3,
-    name: 'Matt Cannon',
+    name: 'Dr. Sunil Sharma',
     role: 'ORTHOPEDIC',
     description: 'Lorem ipsum dolor sit amet consecte adipiscing elit amet hendrerit pretium nulla sed enim iaculis mi.',
     imagePath: '/assets/doctor3.jpeg',
@@ -57,7 +57,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     id: 4,
-    name: 'Andy Smith',
+    name: 'Dr. Sunita Deb',
     role: 'BRAIN SURGEON',
     description: 'Lorem ipsum dolor sit amet consecte adipiscing elit amet hendrerit pretium nulla sed enim iaculis mi.',
     imagePath: '/assets/doctor4.jpeg',
@@ -70,7 +70,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     id: 5,
-    name: 'Lily Woods',
+    name: 'Dr. Kunal Kapoor',
     role: 'HEART SPECIALIST',
     description: 'Lorem ipsum dolor sit amet consecte adipiscing elit amet hendrerit pretium nulla sed enim iaculis mi.',
     imagePath: '/assets/doctor5.webp',
@@ -83,7 +83,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     id: 6,
-    name: 'Patrick Meyer',
+    name: 'Dr. Anushka Shetty',
     role: 'EYE SPECIALIST',
     description: 'Lorem ipsum dolor sit amet consecte adipiscing elit amet hendrerit pretium nulla sed enim iaculis mi.',
     imagePath: '/assets/doctor6.avif',
