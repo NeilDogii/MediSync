@@ -16,7 +16,7 @@ const testimonials = [
     id: 2,
     name: "Arjun Mehta",
     text: "The reminders for appointments and medications have been a lifesaver. MediSync keeps my health on track!",
-    img: "/assets/user2.jpg",
+    img: "/assets/user2.jpeg",
     rating: 5,
   },
   {
@@ -44,14 +44,14 @@ const testimonials = [
     id: 6,
     name: "Vikram Singh",
     text: "Finally, a healthcare app that's simple to use. My elderly parents can navigate it without any confusion.",
-    img: "/assets/user1.jpg",
+    img: "/assets/user1.jpeg",
     rating: 5,
   },
   {
     id: 7,
     name: "Karthik Krishnan",
     text: "I can track my health history and share it with specialists easily. The doctors are highly skilled. MediSync is truly innovative!",
-    img: "/assets/user5.jpg",
+    img: "/assets/user5.jpeg",
     rating: 5,
   },
   {

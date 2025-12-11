@@ -1,24 +1,25 @@
 'use client'
 import React from 'react'
 
-export type PatientListItem = {
+export type AppointmentItem = {
   id: string | number
   initials: string
-  title: string
-  subtitle?: string
-  time?: string
+  name: string
+  purpose: string
+  time: string
   color?: 'pink' | 'blue' | 'teal' | 'gray'
 }
 
-export const samplePatientList: PatientListItem[] = [
-  { id: 1, initials: 'SM', title: 'Weekly Visit', time: '9:15 AM', color: 'pink' },
-  { id: 2, initials: 'AD', title: 'Routine Checkup', time: '10:30 AM', color: 'blue' },
-  { id: 3, initials: 'DJ', title: 'Report', time: '8:50 AM', color: 'teal' },
-  { id: 4, initials: 'SM', title: 'Weekly Visit', time: '11:15 AM', color: 'pink' },
+export const samplePatientList: AppointmentItem[] = [
+  { id: 1, initials: 'SM', name: 'Samantha M.', purpose: 'Checkup', time: '9:15 AM', color: 'pink' },
+  { id: 2, initials: 'AD', name: 'Arun D.', purpose: 'Routine Checkup', time: '10:30 AM', color: 'blue' },
+  { id: 3, initials: 'DJ', name: 'Deepali J.', purpose: 'Lab Report', time: '8:50 AM', color: 'teal' },
+  { id: 4, initials: 'SM', name: 'Sidharth M.', purpose: 'Follow-up', time: '11:15 AM', color: 'pink' },
+  { id: 5, initials: 'RK', name: 'Rohan K.', purpose: 'Skin Allergy Consult', time: '12:45 PM', color: 'gray' },
 ]
 
 type Props = {
-  items?: PatientListItem[]
+  items?: AppointmentItem[]
   className?: string
 }
 
@@ -42,18 +43,21 @@ export default function patientList({ items = samplePatientList, className = '' 
             className="flex items-center justify-between gap-4 p-3 mb-3 rounded-lg hover:bg-white/60 transition-colors"
           >
             <div className="flex items-center gap-3">
+              
               <div className={`flex items-center justify-center w-10 h-10 rounded-full font-bold ${c.avatarBg} ${c.ring} ring-2`}>
                 {it.initials}
               </div>
+
               <div>
-                <div className="text-sm font-medium text-gray-900">{it.title}</div>
-                {it.subtitle && <div className="text-xs text-gray-500">{it.subtitle}</div>}
+                <div className="text-sm font-semibold text-gray-900">{it.name}</div>
+                <div className="text-xs text-gray-500">{it.purpose}</div>
               </div>
             </div>
 
-            {it.time ? (
-              <div className={`text-xs px-3 py-1 rounded-full ${c.pillBg} ${c.pillText}`}>{it.time}</div>
-            ) : null}
+            <div className={`text-xs px-3 py-1 rounded-full ${c.pillBg} ${c.pillText}`}>
+              {it.time}
+            </div>
+
           </div>
         )
       })}

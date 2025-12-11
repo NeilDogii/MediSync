@@ -41,7 +41,7 @@ const patientData: Patient[] = [
   },
 ]
 
-// ✅ Stats
+//  Stats
 const totalPatients = patientData.length
 const activePatients = patientData.filter(p => p.status === "Active").length
 const blockedPatients = patientData.filter(p => p.status === "Blocked").length
@@ -52,7 +52,7 @@ export default function PatientListPage() {
       <SidebarAdmin />
 
       <div className="ml-64 px-8 py-6">
-        {/* ✅ Heading */}
+        {/*  Heading */}
         <div className="mb-6">
           <h1 className="text-3xl font-bold text-gray-800">Patient Management</h1>
           <p className="text-sm text-gray-600 mt-1">
@@ -60,7 +60,7 @@ export default function PatientListPage() {
           </p>
         </div>
 
-        {/* ✅ Stats */}
+        {/*  Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
           <div className="bg-white border rounded-lg p-4">
             <p className="text-sm text-gray-500">Total Patients</p>
@@ -78,7 +78,7 @@ export default function PatientListPage() {
           </div>
         </div>
 
-        {/* ✅ Table */}
+        {/*  Table */}
         <div className="bg-white border rounded-lg p-4">
           <h2 className="text-lg font-semibold mb-3">Patient List</h2>
 

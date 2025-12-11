@@ -18,7 +18,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Trash2 } from "lucide-react";
-import Sidebar from "@/components/DoctorComponents/Sidebar";
+import Sidebar from "@/components/DoctorComponents/SidebarDoctor";
 
 const Calendar: React.FC = () => {
   const [currentEvents, setCurrentEvents] = useState<EventApi[]>([]);
