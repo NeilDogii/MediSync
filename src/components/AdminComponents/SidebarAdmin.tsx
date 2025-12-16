@@ -5,9 +5,9 @@ import { usePathname } from "next/navigation";
 
 const SidebarAdmin: React.FC = () => {
 
-  const pathname = usePathname(); // ✅ current route
+  const pathname = usePathname(); 
 
-  // ✅ ACTIVE LINK FUNCTION (THIS FIXES YOUR ERROR)
+  
   const getLinkClass = (path: string) => {
     return pathname === path
       ? "block py-2 px-3 rounded-lg bg-gray-100"

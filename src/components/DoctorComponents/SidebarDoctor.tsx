@@ -8,14 +8,14 @@ const SidebarDoctor: React.FC = () => {
 
   const pathname = usePathname();
 
-  // Highlight active route
+  
   const getLinkClass = (path: string) => {
     return pathname === path
       ? "block py-2 px-3 rounded-lg bg-gray-100 font-medium"
       : "block py-2 px-3 rounded-lg hover:bg-gray-100";
   };
 
-  // Hide sidebar if user is not in doctor routes
+  
   if (!pathname.startsWith("/doctor")) {
     return null;
   }
@@ -29,7 +29,7 @@ const SidebarDoctor: React.FC = () => {
           {/* Header */}
           <header className="p-4 flex items-center gap-2">
             <img src="/assets/logo.jpg" alt="Brand Logo" className="h-8 w-auto" />
-            {/* <span className="text-sm font-semibold">Doctor Panel</span> */}
+            
           </header>
 
           {/* Menu */}
@@ -94,7 +94,7 @@ const SidebarDoctor: React.FC = () => {
                 onClick={() => console.log("Doctor Signed Out")}
                 className="text-xs text-red-600 font-bold hover:underline"
               >
-                Logout
+                SignUp
               </button>
 
             </div>
