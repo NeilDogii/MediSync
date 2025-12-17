@@ -1,8 +1,6 @@
 import SidebarDoctor from "@/components/DoctorComponents/SidebarDoctor";
-import DashboardBackground from "../../components/DoctorComponents/DashboardBackground";
+import DashboardBackground from "../../../components/DoctorComponents/DashboardBackground";
 // import Sidebar from "../../components/DoctorComponents/Sidebar";
-
-
 
 export default function DashboardPage() {
   return (
@@ -10,7 +8,6 @@ export default function DashboardPage() {
       {/* <Sidebar/> */}
       <SidebarDoctor />
       <DashboardBackground />
-      
     </div>
-  )
+  );
 }
