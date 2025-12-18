@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { deleteCookie } from "@/utils/cookie";
 import { ADMIN_TOKEN_KEY } from "@/constants/keys";
+import Image from "next/image";
 
 const SidebarAdmin: React.FC = () => {
   const pathname = usePathname();
@@ -31,10 +32,12 @@ const SidebarAdmin: React.FC = () => {
       <div className="lg:block w-64 fixed top-0 start-0 bottom-0 z-50 bg-white border-e border-gray-200">
         <div className="relative flex flex-col h-full">
           <header className="p-4 flex justify-between items-center">
-            <img
+            <Image
               src="/assets/logo.jpg"
-              alt="Brand Logo"
-              className="h-8 w-auto"
+              alt="Logo"
+              width={150}
+              height={40}
+              className="h-10 mx-auto mb-2"
             />
           </header>
 
@@ -95,8 +98,10 @@ const SidebarAdmin: React.FC = () => {
           <footer className="mt-auto p-3 border-t">
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-2">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1734122415415-88cb1d7d5dc0"
+                  width={28}
+                  height={28}
                   className="h-7 w-7 rounded-full"
                   alt="User"
                 />

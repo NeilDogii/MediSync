@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { deleteCookie } from "@/utils/cookie";
 import { DOCTOR_TOKEN_KEY } from "@/constants/keys";
+import Image from "next/image";
 
 const SidebarDoctor: React.FC = () => {
   const pathname = usePathname();
@@ -27,10 +28,12 @@ const SidebarDoctor: React.FC = () => {
         <div className="relative flex flex-col h-full">
           {/* Header */}
           <header className="p-4 flex items-center gap-2">
-            <img
+            <Image
               src="/assets/logo.jpg"
-              alt="Brand Logo"
-              className="h-8 w-auto"
+              alt="Logo"
+              width={150}
+              height={40}
+              className="h-10 mx-auto mb-2"
             />
           </header>
 
@@ -93,8 +96,10 @@ const SidebarDoctor: React.FC = () => {
           <footer className="mt-auto p-3 border-t">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1607746882042-944635dfe10e"
+                  width={28}
+                  height={28}
                   className="h-7 w-7 rounded-full"
                   alt="Doctor Image"
                 />
