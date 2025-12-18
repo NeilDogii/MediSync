@@ -6,14 +6,15 @@ import Service_card from "../../components/UserComponents/Service_card";
 import Team from "../../components/UserComponents/Team";
 import Testimonial from "../../components/UserComponents/Testimonial";
 import Footer from "../../components/UserComponents/Footer";
+import { getCookie } from "@/utils/cookie";
+import { PATIENT_TOKEN_KEY } from "@/constants/keys";
 
+export default async function page() {
+  const token = await getCookie(PATIENT_TOKEN_KEY);
 
-
-
-export default function page() {
   return (
     <>
-      <Navbar />
+      <Navbar isLoggedIn={!!token} />
       <Hero />
       <Get_started />
       <Service_card />
@@ -21,5 +22,5 @@ export default function page() {
       <Testimonial />
       <Footer />
     </>
-  )
+  );
 }

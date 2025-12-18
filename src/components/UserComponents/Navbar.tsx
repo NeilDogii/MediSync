@@ -2,17 +2,21 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { Eye, EyeOff, Menu, X } from "lucide-react";
+import { LogOut, Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Popup from "../global/Popup";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import GoogleLoginBtn from "./GoogleLoginBtn";
-import { GOOGLE_CLIENT_ID } from "@/constants/environment/variables";
+import UserLoginForm from "./forms/UserLoginForm";
+import UserRegisterForm from "./forms/UserRegisterForm";
+import { deleteCookie } from "@/utils/cookie";
+import { PATIENT_TOKEN_KEY } from "@/constants/keys";
 
-export default function Navbar() {
+export default function Navbar({
+  isLoggedIn = false,
+}: {
+  isLoggedIn?: boolean;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [showPopup, setShowPopup] = useState<"LOGIN" | "REGISTER" | null>(null);
-  const [showPassword, setShowPassword] = useState(false);
   const pathname = usePathname();
 
   // Function to generate link classes dynamically
@@ -56,20 +60,42 @@ export default function Navbar() {
 
         {/* Desktop Buttons */}
         <div className="hidden md:flex items-center space-x-4">
-          <div
-            // href="/signup"
-            className="text-[#0074cc] font-semibold hover:underline cursor-pointer"
-            onClick={() => setShowPopup("REGISTER")}
-          >
-            Sign Up
-          </div>
-          <div
-            // href="/login"
-            className="bg-[#0074cc] text-white px-6 py-2 rounded-lg font-semibold hover:bg-[#005fa3] cursor-pointer"
-            onClick={() => setShowPopup("LOGIN")}
-          >
-            Log In
-          </div>
+          {isLoggedIn ? (
+            <div className="flex items-center space-x-4">
+              <div className="flex flex-col items-center">
+                <div className="w-10 h-10 bg-[#0074cc] rounded-full flex items-center justify-center text-white font-semibold">
+                  U
+                </div>
+                {/* <span className="text-xs text-gray-600 mt-1">User</span> */}
+              </div>
+              <button
+                onClick={async () => {
+                  await deleteCookie(PATIENT_TOKEN_KEY);
+                  window.location.reload();
+                }}
+                className="text-red-500 cursor-pointer rounded-lg font-semibold transition-all"
+              >
+                <LogOut />
+              </button>
+            </div>
+          ) : (
+            <>
+              <div
+                // href="/signup"
+                className="text-[#0074cc] font-semibold hover:underline cursor-pointer"
+                onClick={() => setShowPopup("REGISTER")}
+              >
+                Sign Up
+              </div>
+              <div
+                // href="/login"
+                className="bg-[#0074cc] text-white px-6 py-2 rounded-lg font-semibold hover:bg-[#005fa3] cursor-pointer"
+                onClick={() => setShowPopup("LOGIN")}
+              >
+                Log In
+              </div>
+            </>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -137,20 +163,41 @@ export default function Navbar() {
 
           {/* Mobile Buttons */}
           <div className="border-t pt-5 flex flex-col space-y-3">
-            <div
-              // href="/signup"
-              onClick={() => setIsOpen(false)}
-              className="border border-[#0074cc] text-[#0074cc] text-center px-6 py-2 rounded-lg font-semibold hover:bg-[#0074cc] hover:text-white transition-all"
-            >
-              Sign Up
-            </div>
-            <div
-              // href="/login"
-              onClick={() => setIsOpen(false)}
-              className="bg-[#0074cc] text-white text-center px-6 py-2 rounded-lg font-semibold hover:bg-[#005fa3] transition-all"
-            >
-              Log In
-            </div>
+            {isLoggedIn ? (
+              <button
+                onClick={async () => {
+                  await deleteCookie(PATIENT_TOKEN_KEY);
+                  window.location.reload();
+                }}
+                className="flex items-center space-x-2 text-red-500 cursor-pointer rounded-lg font-semibold transition-all"
+              >
+                <LogOut />
+                <span>Logout</span>
+              </button>
+            ) : (
+              <>
+                <div
+                  // href="/signup"
+                  onClick={() => {
+                    setIsOpen(false);
+                    setShowPopup("REGISTER");
+                  }}
+                  className="border border-[#0074cc] text-[#0074cc] text-center px-6 py-2 rounded-lg font-semibold hover:bg-[#0074cc] hover:text-white transition-all"
+                >
+                  Sign Up
+                </div>
+                <div
+                  // href="/login"
+                  onClick={() => {
+                    setIsOpen(false);
+                    setShowPopup("LOGIN");
+                  }}
+                  className="bg-[#0074cc] text-white text-center px-6 py-2 rounded-lg font-semibold hover:bg-[#005fa3] transition-all"
+                >
+                  Log In
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -160,221 +207,8 @@ export default function Navbar() {
           if (!set) setShowPopup(null);
         }}
       >
-        {showPopup === "LOGIN" && (
-          <div className="p-6">
-            {/* Header */}
-            <div className="text-center mb-6">
-              <Image
-                src="/assets/logo.jpg"
-                alt="Logo"
-                width={150}
-                height={80}
-                className="h-10 mx-auto mb-2"
-              />
-              <h1 className="text-xl font-semibold text-gray-800">
-                Login to Continue
-              </h1>
-              <p className="text-sm text-gray-500">
-                Sign in with email or phone
-              </p>
-            </div>
-            {/* Form */}
-            <form className="space-y-4">
-              {/* Email / Phone */}
-              <div>
-                <label
-                  htmlFor="emailOrPhone"
-                  className="block text-sm text-gray-600 mb-1"
-                >
-                  Email / Phone
-                </label>
-                <input
-                  id="emailOrPhone"
-                  name="emailOrPhone"
-                  type="text"
-                  placeholder="example@email.com or 9876543210"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg
-                         focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                  required
-                />
-              </div>
-              {/* Password */}
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm text-gray-600 mb-1"
-                >
-                  Password
-                </label>
-                <div className="relative">
-                  <input
-                    id="password"
-                    name="password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Enter password"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg pr-10
-                           focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-3 flex items-center text-gray-500"
-                  >
-                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                  </button>
-                </div>
-              </div>
-              {/* Login Button */}
-              <button
-                type="submit"
-                className="w-full py-2 mt-2 bg-indigo-700 text-white rounded-lg
-                       font-medium hover:bg-indigo-600 transition cursor-pointer"
-              >
-                Login
-              </button>
-            </form>
-            {/* Divider */}
-            <div className="flex items-center my-5">
-              <div className="flex-grow h-px bg-gray-200" />
-              <span className="px-3 text-xs text-gray-400">OR</span>
-              <div className="flex-grow h-px bg-gray-200" />
-            </div>
-            {/* Google Login */}
-            <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-              <GoogleLoginBtn />
-            </GoogleOAuthProvider>
-            {/* Footer */}
-            <p className="text-xs text-center text-gray-400 mt-5">
-              © 2025 Patient Login
-            </p>
-          </div>
-        )}
-        {showPopup === "REGISTER" && (
-          <div className="p-6">
-            {/* Header */}
-            <div className="text-center mb-6">
-              <Image
-                src="/assets/logo.jpg"
-                alt="Logo"
-                width={150}
-                height={80}
-                className="h-10 mx-auto mb-2"
-              />
-              <h1 className="text-xl font-semibold text-gray-800">
-                Login to Continue
-              </h1>
-              <p className="text-sm text-gray-500">
-                Sign in with email or phone
-              </p>
-            </div>
-            {/* Form */}
-            <form className="space-y-4">
-              {/* Email */}
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm text-gray-600 mb-1"
-                >
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="text"
-                  placeholder="example@email.com"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg
-                         focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                  required
-                />
-              </div>
-              {/* PHONE */}
-              <div>
-                <label
-                  htmlFor="phone"
-                  className="block text-sm text-gray-600 mb-1"
-                >
-                  Phone
-                </label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="text"
-                  placeholder="0931XXXXXXX"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg
-                         focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm text-gray-600 mb-1"
-                >
-                  Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="John Doe"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg
-                         focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                  required
-                />
-              </div>
-              {/* Password */}
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm text-gray-600 mb-1"
-                >
-                  Password
-                </label>
-                <div className="relative">
-                  <input
-                    id="password"
-                    name="password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Enter password"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg pr-10
-                           focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-3 flex items-center text-gray-500"
-                  >
-                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                  </button>
-                </div>
-              </div>
-              {/* Login Button */}
-              <button
-                type="submit"
-                className="w-full py-2 mt-2 bg-indigo-700 text-white rounded-lg
-                       font-medium hover:bg-indigo-600 transition cursor-pointer"
-              >
-                Login
-              </button>
-            </form>
-            {/* Divider */}
-            <div className="flex items-center my-5">
-              <div className="flex-grow h-px bg-gray-200" />
-              <span className="px-3 text-xs text-gray-400">OR</span>
-              <div className="flex-grow h-px bg-gray-200" />
-            </div>
-            {/* Google Login */}
-            <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-              <GoogleLoginBtn />
-            </GoogleOAuthProvider>
-            {/* Footer */}
-            <p className="text-xs text-center text-gray-400 mt-5">
-              © 2025 Patient Login
-            </p>
-          </div>
-        )}
+        {showPopup === "LOGIN" && <UserLoginForm />}
+        {showPopup === "REGISTER" && <UserRegisterForm />}
       </Popup>
     </nav>
   );
