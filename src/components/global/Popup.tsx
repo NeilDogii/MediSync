@@ -21,6 +21,7 @@ export default function Popup({
 }) {
   useEffect(() => {
     if (showPopup) {
+      // Disable background scroll and handle scrollbar shift
       const scrollbarWidth =
         window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
@@ -35,6 +36,7 @@ export default function Popup({
       document.addEventListener("keydown", handleKeyDown);
 
       return () => {
+        // Re-enable background scroll and reset padding
         document.body.style.overflow = "";
         document.body.style.paddingRight = "";
         document.removeEventListener("keydown", handleKeyDown);
@@ -49,7 +51,7 @@ export default function Popup({
       onClick={() => {
         onChangeShowPopup(false);
       }}
-      className={`fixed bottom-0 left-0 z-40 flex h-dvh w-dvw items-center justify-center bg-black/80 backdrop-blur-sm transition-all duration-100 ease-in-out ${
+      className={`fixed bottom-0 cursor-pointer left-0 z-50 flex h-dvh w-dvw items-center justify-center bg-black/70 backdrop-blur-sm transition-all duration-100 ease-in-out ${
         showPopup ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
     >
@@ -59,7 +61,7 @@ export default function Popup({
         onClick={(e) => {
           e.stopPropagation();
         }}
-        className={`relative z-50 bg-white transition-all duration-300 max-sm:w-dvw max-sm:self-end max-sm:rounded-t-3xl max-sm:px-3 max-sm:pt-7 max-sm:pb-3 sm:min-w-[450px] sm:duration-100 ${
+        className={`relative z-50 cursor-default bg-white transition-all duration-300 max-sm:w-dvw max-sm:self-end max-sm:rounded-t-3xl max-sm:px-3 max-sm:pt-7 max-sm:pb-3 sm:min-w-[450px] sm:duration-100 ${
           showPopup
             ? "max-sm:translate-y-0 sm:scale-100"
             : "max-sm:translate-y-full sm:scale-90"
@@ -73,7 +75,7 @@ export default function Popup({
           onClick={() => {
             onChangeShowPopup(false);
           }}
-          className={`absolute -top-10 right-1/2 z-50 cursor-pointer rounded-full p-1.5 max-sm:translate-x-1/2 max-sm:bg-black/30 max-sm:text-white/80 sm:top-1 sm:right-1 sm:scale-75 sm:p-1 ${
+          className={`absolute -top-10 right-1/2 z-50 cursor-pointer rounded-full p-1.5 max-sm:translate-x-1/2 max-sm:bg-black/30 sm:top-1 sm:right-1 sm:scale-75 sm:p-1 ${
             closeButtonClassName || ""
           }`}
         />

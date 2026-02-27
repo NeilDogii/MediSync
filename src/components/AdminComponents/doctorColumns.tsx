@@ -1,18 +1,9 @@
-"use client"
+"use client";
 
-import { ColumnDef } from "@tanstack/react-table"
-import { Button } from "@/components/ui/button"
-import { Eye, Pencil, Trash2 } from "lucide-react"
-
-export type Doctor = {
-  id: string
-  name: string
-  specialization: string
-  phone: string
-  loginId: string
-  status: "Active" | "Blocked"
-  password: string
-}
+import { ColumnDef } from "@tanstack/react-table";
+import { Button } from "@/components/ui/button";
+import { LockOpen, Pencil, Trash2 } from "lucide-react";
+import { Doctor } from "@/@types/doctor";
 
 export const doctorColumns: ColumnDef<Doctor>[] = [
   {
@@ -32,57 +23,67 @@ export const doctorColumns: ColumnDef<Doctor>[] = [
     header: "Phone",
   },
   {
-    accessorKey: "loginId",
-    header: "Login ID",
+    accessorKey: "email",
+    header: "Email",
   },
   {
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-      const status = row.original.status
+      const status = row.original.isActive;
       return (
         <span
           className={`font-medium ${
-            status === "Active" ? "text-green-600" : "text-red-600"
+            status ? "text-green-600" : "text-red-600"
           }`}
         >
-          {status}
+          {status ? "Active" : "Inactive"}
         </span>
-      )
+      );
     },
   },
   {
     id: "actions",
     header: "Actions",
     cell: ({ row }) => {
-      const doctor = row.original
+      const doctor = row.original;
 
       return (
         <div className="flex gap-2">
           {/* SHOW */}
-          <Button
+          {/* <Button
             size="icon"
             variant="outline"
             onClick={() =>
               alert(
                 `Doctor Account Details\n\nName: ${doctor.name}
-Specialization: ${doctor.specialization}
-Phone: ${doctor.phone}
-Login ID: ${doctor.loginId}
-Status: ${doctor.status}
-Password: ${doctor.password}`
+                Specialization: ${doctor.specialization}
+                Phone: ${doctor.phone}
+                Email: ${doctor.email}
+                Status: ${doctor.isActive ? "Active" : "Inactive"}
+                Password: ${doctor.password}`,
               )
             }
           >
             <Eye className="h-4 w-4" />
-          </Button>
+          </Button> */}
 
           {/* EDIT */}
           <Button
             size="icon"
+            variant={"outline"}
             onClick={() => alert(`Edit Doctor: ${doctor.name}`)}
           >
             <Pencil className="h-4 w-4" />
+          </Button>
+
+          {/* EDIT PASSWORD */}
+          <Button
+            size="icon"
+            variant={"outline"}
+            onClick={() => alert(`Edit Doctor Password: ${doctor.name}`)}
+          >
+            <LockOpen className="h-4 w-4" />
           </Button>
 
           {/* DELETE */}
@@ -94,7 +95,7 @@ Password: ${doctor.password}`
             <Trash2 className="h-4 w-4" />
           </Button>
         </div>
-      )
+      );
     },
   },
-]
+];
