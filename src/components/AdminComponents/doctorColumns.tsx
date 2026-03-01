@@ -1,9 +1,10 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Button } from "@/components/ui/button";
-import { LockOpen, Pencil, Trash2 } from "lucide-react";
 import { Doctor } from "@/@types/doctor";
+import EditDoctorButton from "./EditDoctorButton";
+import DeleteDoctorButton from "./DeleteDoctorButton";
+import EditDoctorPasswordButton from "./EditDoctorPasswordButton";
 
 export const doctorColumns: ColumnDef<Doctor>[] = [
   {
@@ -50,50 +51,14 @@ export const doctorColumns: ColumnDef<Doctor>[] = [
 
       return (
         <div className="flex gap-2">
-          {/* SHOW */}
-          {/* <Button
-            size="icon"
-            variant="outline"
-            onClick={() =>
-              alert(
-                `Doctor Account Details\n\nName: ${doctor.name}
-                Specialization: ${doctor.specialization}
-                Phone: ${doctor.phone}
-                Email: ${doctor.email}
-                Status: ${doctor.isActive ? "Active" : "Inactive"}
-                Password: ${doctor.password}`,
-              )
-            }
-          >
-            <Eye className="h-4 w-4" />
-          </Button> */}
-
           {/* EDIT */}
-          <Button
-            size="icon"
-            variant={"outline"}
-            onClick={() => alert(`Edit Doctor: ${doctor.name}`)}
-          >
-            <Pencil className="h-4 w-4" />
-          </Button>
+          <EditDoctorButton id={String(doctor.id)} doctor={doctor} />
 
           {/* EDIT PASSWORD */}
-          <Button
-            size="icon"
-            variant={"outline"}
-            onClick={() => alert(`Edit Doctor Password: ${doctor.name}`)}
-          >
-            <LockOpen className="h-4 w-4" />
-          </Button>
+          <EditDoctorPasswordButton id={String(doctor.id)} />
 
           {/* DELETE */}
-          <Button
-            size="icon"
-            variant="destructive"
-            onClick={() => alert(`Delete Doctor: ${doctor.name}`)}
-          >
-            <Trash2 className="h-4 w-4" />
-          </Button>
+          <DeleteDoctorButton id={String(doctor.id)} />
         </div>
       );
     },

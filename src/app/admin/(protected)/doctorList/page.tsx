@@ -4,49 +4,6 @@ import { doctorColumns } from "@/components/AdminComponents/doctorColumns";
 import SidebarAdmin from "@/components/AdminComponents/SidebarAdmin";
 import { fetchDoctors } from "@/utils/requests/data/admin";
 
-// const doctorData: Doctor[] = [
-//   {
-//     id: "1",
-//     name: "Dr. Raj Malhotra",
-//     specialization: "CARDIOLOGY",
-//     phone: "9876543210",
-//     email: "raj@medisync.com",
-//     isActive: true,
-//     password: "raj123",
-//     username: "rajmalhotra",
-//   },
-//   {
-//     id: "2",
-//     name: "Dr. Ananya Sen",
-//     specialization: "NEUROLOGY",
-//     phone: "9123456780",
-//     email: "ananya@medisync.com",
-//     isActive: true,
-//     password: "ananya123",
-//     username: "ananyasen",
-//   },
-//   {
-//     id: "3",
-//     name: "Dr. Arjun Patel",
-//     specialization: "ORTHOPEDICS",
-//     phone: "9012345678",
-//     email: "arjun@medisync.com",
-//     isActive: false,
-//     password: "arjun123",
-//     username: "arjunpatel",
-//   },
-//   {
-//     id: "4",
-//     name: "Dr. Meera Iyer",
-//     specialization: "DERMATOLOGY",
-//     phone: "8899776655",
-//     email: "meera@medisync.com",
-//     isActive: true,
-//     password: "meera123",
-//     username: "meeraiyer",
-//   },
-// ];
-
 export default async function DoctorListPage() {
   const doctorList = await fetchDoctors();
   const totalDoctors = doctorList.length;

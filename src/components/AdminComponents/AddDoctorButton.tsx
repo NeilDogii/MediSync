@@ -22,7 +22,7 @@ export default function AddDoctorButton() {
       </Button>
 
       <Popup showPopup={isOpen} onChangeShowPopup={(show) => setIsOpen(show)}>
-        <DoctorDetailsForm />
+        <DoctorDetailsForm onClose={() => setIsOpen(false)} />
       </Popup>
     </>
   );

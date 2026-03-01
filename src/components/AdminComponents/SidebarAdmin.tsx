@@ -5,6 +5,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { deleteCookie } from "@/utils/cookie";
 import { ADMIN_TOKEN_KEY } from "@/constants/keys";
 import Image from "next/image";
+import {
+  AmbulanceIcon,
+  BellIcon,
+  BlocksIcon,
+  ChartSplineIcon,
+  ClipboardClock,
+  UserIcon,
+} from "lucide-react";
 
 const SidebarAdmin: React.FC = () => {
   const pathname = usePathname();
@@ -46,7 +54,10 @@ const SidebarAdmin: React.FC = () => {
             <ul className="space-y-1 text-sm">
               <li>
                 <Link href="/admin" className={getLinkClass("/admin")}>
-                  Dashboard
+                  <div className="flex items-center">
+                    <BlocksIcon className="h-4 w-4 me-2" />
+                    Dashboard
+                  </div>
                 </Link>
               </li>
 
@@ -55,7 +66,10 @@ const SidebarAdmin: React.FC = () => {
                   href="/admin/doctorList"
                   className={getLinkClass("/admin/doctorList")}
                 >
-                  Doctor
+                  <div className="flex items-center">
+                    <AmbulanceIcon className="h-4 w-4 me-2" />
+                    Doctor
+                  </div>
                 </Link>
               </li>
 
@@ -64,7 +78,10 @@ const SidebarAdmin: React.FC = () => {
                   href="/admin/patientList"
                   className={getLinkClass("/admin/patientList")}
                 >
-                  Patient
+                  <div className="flex items-center">
+                    <UserIcon className="h-4 w-4 me-2" />
+                    Patient
+                  </div>
                 </Link>
               </li>
 
@@ -73,7 +90,10 @@ const SidebarAdmin: React.FC = () => {
                   href="/admin/reports"
                   className={getLinkClass("/admin/reports")}
                 >
-                  Reports
+                  <div className="flex items-center">
+                    <ClipboardClock className="h-4 w-4 me-2" />
+                    Reports
+                  </div>
                 </Link>
               </li>
 
@@ -82,13 +102,19 @@ const SidebarAdmin: React.FC = () => {
                   href="/notifications"
                   className={getLinkClass("/notifications")}
                 >
-                  Notifications
+                  <div className="flex items-center">
+                    <BellIcon className="h-4 w-4 me-2" />
+                    Notifications
+                  </div>
                 </Link>
               </li>
 
               <li>
                 <Link href="/analytics" className={getLinkClass("/analytics")}>
-                  Analytics
+                  <div className="flex items-center">
+                    <ChartSplineIcon className="h-4 w-4 me-2" />
+                    Analytics
+                  </div>
                 </Link>
               </li>
             </ul>
