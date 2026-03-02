@@ -1,6 +1,7 @@
 "use server";
 
 import { Doctor } from "@/@types/doctor";
+import { Patient } from "@/@types/patient";
 import { API } from "@/constants/environment/variables";
 import { revalidateTag } from "next/cache";
 
@@ -107,4 +108,22 @@ export async function deleteDoctor({ id }: { id: string }) {
     success: true,
     data: result,
   };
+}
+
+export async function fetchPatients(): Promise<Patient[]> {
+  const response = await fetch(`${API}/admin/patients`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    next: { tags: ["cache", "patients"], revalidate: 60 * 5 },
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Failed to fetch patients.");
+  }
+
+  const data = await response.json();
+  return data;
 }

@@ -8,4 +8,5 @@ export interface Doctor extends Base {
     specialization: DoctorSpecialization
     phone: string
     email: string
+    fees?: number
 }
