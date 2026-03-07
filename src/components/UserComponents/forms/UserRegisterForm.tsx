@@ -9,11 +9,15 @@ import { setCookie } from "@/utils/cookie";
 import { PATIENT_TOKEN_KEY } from "@/constants/keys";
 import { useRouter } from "next/navigation";
 
-export default function UserRegisterForm() {
+export default function UserRegisterForm({
+  togglePopupType,
+}: {
+  togglePopupType?: (type: "LOGIN" | "REGISTER") => void;
+}) {
   const [showPassword, setShowPassword] = useState(false);
   const { refresh } = useRouter();
   return (
-    <div className="p-6">
+    <div className="px-5">
       {/* Header */}
       <div className="text-center mb-6">
         <Image
@@ -140,6 +144,17 @@ export default function UserRegisterForm() {
       </GoogleOAuthProvider>
       {/* Footer */}
       <p className="text-xs text-center text-gray-400 mt-5">
+        {togglePopupType && (
+          <>
+            <span>Already have an account? </span>
+            <span
+              className="text-[#0074cc] font-semibold hover:underline cursor-pointer mr-2"
+              onClick={() => togglePopupType("REGISTER")}
+            >
+              {"Login"}
+            </span>
+          </>
+        )}
         © 2025 Patient Login
       </p>
     </div>

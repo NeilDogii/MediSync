@@ -19,6 +19,16 @@ export default function Navbar({
   const [showPopup, setShowPopup] = useState<"LOGIN" | "REGISTER" | null>(null);
   const pathname = usePathname();
 
+  function togglePopupType(type: "LOGIN" | "REGISTER") {
+    if (type == "LOGIN") {
+      setShowPopup("REGISTER");
+    } else if (type == "REGISTER") {
+      setShowPopup("LOGIN");
+    } else {
+      setShowPopup(null);
+    }
+  }
+
   // Function to generate link classes dynamically
   const getLinkClass = (href: string) =>
     pathname === href
@@ -207,8 +217,12 @@ export default function Navbar({
           if (!set) setShowPopup(null);
         }}
       >
-        {showPopup === "LOGIN" && <UserLoginForm />}
-        {showPopup === "REGISTER" && <UserRegisterForm />}
+        {showPopup === "LOGIN" && (
+          <UserLoginForm togglePopupType={togglePopupType} />
+        )}
+        {showPopup === "REGISTER" && (
+          <UserRegisterForm togglePopupType={togglePopupType} />
+        )}
       </Popup>
     </nav>
   );
